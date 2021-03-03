@@ -16,10 +16,10 @@ document.addEventListener("DOMContentLoaded", () => {
     let current = time.textContent
 
     //cards that we won (matched)
-    const CardsWon = [];
+    let CardsWon = [];
 
     //displayed score 
-    const score = document.querySelector('#score')
+    let score = document.querySelector('#score')
 
     //time interval varibale
     let timing
@@ -78,8 +78,8 @@ document.addEventListener("DOMContentLoaded", () => {
             name: 'candy',
             img: 'images/candy.png'
         }, {
-            name: 'lolli',
-            img: 'images/lolli.png'
+            name: 'candy',
+            img: 'images/candy.png'
         }
 
     ];
@@ -88,32 +88,44 @@ document.addEventListener("DOMContentLoaded", () => {
 
     //attaching click event on the start button 
     document.querySelector('#start').addEventListener('click', () => {
-
+        document.querySelector('.intro').style.display = "none";
+        let img = document.querySelector('#trainimage');
+        document.querySelector('.pros').removeChild(img)
+        document.querySelector('.wrapper').style.display = "block";
+        current = 60;
         timing = setInterval(countdown, 1000);
+
     })
+    //function to refresh game when the player wants to play again
+    let exitt = function () {
+        current = 60;
+        time.textContent = current
+        //removing the result pop up 
+        document.getElementById('popUpBox').style.display = "none";
+        document.getElementById('popUpOverlay').style.display = "none";
+
+        //emptying the grid 
+        var node = document.querySelector(".grid");
+        node.querySelectorAll('*').forEach(n => n.remove());
+        CardsWon = []
+        selectedCardsId = []
+        selectedCards = []
+        score.textContent = CardsWon.length
+        //recreating the board after reshuffle of the cards
+        createBoard();
+        let pic = document.querySelector('#resultpop')
+        let button = document.querySelector('#resultpop')
+        document.querySelector('#box').removeChild(pic)
+        timing = setInterval(countdown, 1000);
+    }
+    // adding a click ent on the - train more - button to allow player another round 
+    var btn = document.querySelector("#train");
+    btn.addEventListener('click', exitt)
 
     // function to check and display the result (when time is up or when player matched all cards)
     function gameOver(status) {
 
-        //function to refresh game when the player wants to play again
-        let exitt = function () {
-            current = 60;
-            time.textContent = current
-            //removing the result pop up 
-            document.getElementById('popUpBox').style.display = "none";
-            document.getElementById('popUpOverlay').style.display = "none";
 
-            //emptying the grid 
-            var node = document.querySelector(".grid");
-            node.querySelectorAll('*').forEach(n => n.remove());
-            CardsWon, selectedCardsId, selectedCards = []
-
-            //recreating the board after reshuffle of the cards
-            createBoard();
-            let pic = document.querySelector('#resultpop')
-            let button = document.querySelector('#resultpop')
-            document.querySelector('#box').removeChild(pic)
-        }
 
         //displaying the result as a pop up 
         let popUpBox = document.getElementById('popUpBox');
@@ -122,25 +134,29 @@ document.addEventListener("DOMContentLoaded", () => {
 
         // if the player won 
         if (status) {
-            document.querySelector('#result').textContent = "congratulation! You have a Good Memory!"
-            el.setAttribute('src', "images/champ.jpg");
+            document.querySelector('#result').textContent = " 🎉Congratulation!! 🎉"
+            document.querySelector('#result1').textContent = " 🎊 You have a Good Memory  🎯"
+            document.querySelector('#result2').textContent = "let's train some More! 💪"
+            // el.setAttribute('src', "images/champ.jpg");
+            el.setAttribute('src', "images/goodbrain.gif");
+            el.setAttribute('id', "resultpop");
         }
 
         //if the player lost 
         else if (!status) {
-            document.querySelector('#result').textContent = "Uh Oh! Time is Up You Lost but it's okay  \n let's train some More!"
+            document.querySelector('#result').textContent = " ⚠️ Uh Oh! Time is Up ⏱️ "
+            document.querySelector('#result1').textContent = "You Lost 😔 but it's okay "
+            document.querySelector('#result2').textContent = "let's train some More! 💪"
             el.setAttribute('id', "resultpop");
             el.setAttribute('src', "images/train.gif");
         }
         //image sizing 
         el.style.width = "40%"
         el.style.height = "30%"
-        let h1 = document.querySelector('#result')
+        let h1 = document.querySelector('#result2')
         h1.after(el)
 
-        // adding a click ent on the - train more - button to allow player another round 
-        var btn = document.querySelector("#train");
-        btn.addEventListener('click', exitt)
+
     }
 
     // time counting and checking the result when time is up 
@@ -194,6 +210,7 @@ document.addEventListener("DOMContentLoaded", () => {
     function isMatch() {
 
         let chosenCards = document.querySelectorAll('img');
+        console.log(chosenCards)
         //chosing cards 
         const card1Id = selectedCardsId[0];
         const card2Id = selectedCardsId[1];
@@ -208,9 +225,9 @@ document.addEventListener("DOMContentLoaded", () => {
             // adding them to the won cards array
             CardsWon.push(chosenCards)
         } else {
-            //if not matching  flipng back the cards 
-            chosenCards[card1Id].setAttribute('src', "images/game.jpg");
+
             chosenCards[card2Id].setAttribute('src', "images/game.jpg");
+            chosenCards[card1Id].setAttribute('src', "images/game.jpg");
             alert("not a match ! let's try again")
         }
         //emptying the chosen cards and ids arrays 
@@ -231,8 +248,9 @@ document.addEventListener("DOMContentLoaded", () => {
         selectedCards.push(cards[cardId].name);
 
         //if the player started the game start the timing 
-        if (selectedCards.length === 1)
-            timing = setInterval(countdown, 1000);
+        // if (selectedCards.length === 1) {
+        //     timing = setInterval(countdown, 1000);
+        // }
 
         selectedCardsId.push(cardId);
         that.setAttribute('src', cards[cardId].img);

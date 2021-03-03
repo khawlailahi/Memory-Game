@@ -1,79 +1,23 @@
 @import url('https://fonts.googleapis.com/css?family=Titan+One');
+@import url('https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Merienda:wght@700&family=Satisfy&family=Seymour+One&display=swap');
+
+/*  ORGANIZED BY ORDER OF APPEARENCE IN THE DOM*/
+
 body{
-    text-align: center;
-    background-image: url("https://ak.picdn.net/shutterstock/videos/1020873610/thumb/1.jpg");
-background-repeat: no-repeat;
-background-size: 100%;
+	text-align: center;
+	background-image: url("https://cdna.artstation.com/p/assets/images/images/008/921/836/large/brain-sky-.jpg?1516116776");
+	background-repeat: no-repeat;
+	background-size: cover;
+	text-align:center;
 }
 .bigdiv{
-     background-color: white;
-     width: 50%;
-     height:100%;
-     margin: 0 auto;
-   
- 
-}
-.details{
-    display: flex;
-}
-#start:hover{
-    cursor: pointer;
-}
-.wrapper{width: 100%;
-   height:auto;
-    background-color: rgba(255, 255, 255, 0.9);
-    margin: 0 auto;
- box-shadow: 10px 10px 20px rgb(49, 39, 80);
- border-radius: 5px;
-
-
-}
-
-.grid{
-    display: flex;
-    flex-wrap: wrap;
-    height: auto;
-    width:90%;
-    margin : 0 auto;
-}
-#popUpBox{
-
-  width: 50%;
-height: 70%;
-  overflow: hidden;
-
-  background: white;
-border: darkblue solid 5px;
-  box-shadow: 0 0 10px rgb(20, 7, 58);
-
-  border-radius: 10px;
-
-  position: absolute;
-
-  top: 50%;
-
-  left: 50%;
-transform: translate(-50%, -50%);
-
-  z-index: 9999;
-
-  padding: 10px;
-
-  text-align: center;
-
-  display: none;
-
-}
-/* title */
-
-
-body{text-align:center}
-.divs{position:absolute}
-#timeleft{
-    margin-left:6%;
-}
-#scoring{
-    margin-left:57%;
+	background-color: white;
+	width: 60%;
+	height:100%;
+	margin: 0 auto;
+	margin-top:-3%;
+	box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.6);
+ border-radius: 30px;
 }
 .container{
     display:block;
@@ -191,3 +135,151 @@ top:50%;
 	90%{border-radius:25% 75% 70% 30% / 39% 50% 50% 61%}
 	100%{border-radius:66% 34% 33% 67% / 65% 73% 27% 35%}
 	}
+.divs{
+	position:absolute
+}
+.pros{
+	display: flex;
+	background:linear-gradient(120deg,#df9de7,#859dc2,#dacccf);
+	margin: 0 auto;
+	border-radius: 2px;
+}
+#pros1{
+	margin: 0 auto;
+	color:rgb(250, 250, 250);
+}
+#pros1 h3{
+	font-family: 'Merienda', cursive;
+	font-size: 23px;
+	font-weight: bold;
+	color:white;
+}
+#pros1 h4{
+	font-family: 'Arial', cursive;
+	font-size: 18px;
+	color:white;
+}
+#ready{
+	font-family: 'Merienda', cursive;
+	color: #7965eb;
+}
+#start{
+	background-color: #7965eb;
+	border-radius: 12px;
+	color: white;
+	border: none;
+	padding: 15px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 25px;
+	font-weight: bold;
+	width: 25%;
+	margin: 3px 2px;
+	cursor: pointer;
+	box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 30px 0 rgba(0,0,0,0.19);
+}
+#start:hover{
+	width: 26%;
+	font-size: 28px;
+	
+}
+.wrapper{
+	display: none;
+	width: 90%;
+	height:auto;
+	background-color: rgba(255, 255, 255, 0.9);
+	margin: 0 auto;
+	box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.6);
+	border-radius: 5px;
+
+
+}
+.details{
+    display: flex;
+	font-family: 'Merienda', cursive;
+	color: white;
+	background-color: rgb(149, 126, 231);
+}
+#timeleft{
+    margin-left:6%;
+}
+#scoring{
+    margin-left:55%;
+}
+
+.grid{
+    display: flex;
+    flex-wrap: wrap;
+    height: auto;
+    width:90%;
+    margin-left: 65px;
+	margin-right:auto;
+}
+#popUpBox{
+
+	width: 50%;
+	height: auto;
+	overflow: hidden;
+
+	background: white;
+	border: rgb(88, 10, 124) solid 5px;
+	box-shadow: 0 0 10px rgb(20, 7, 58);
+	background:linear-gradient(60deg,#df9f6c,#a871ca,#8958a0);
+	border-radius: 10px;
+
+	position: absolute;
+
+	top: 50%;
+
+	left: 50%;
+	transform: translate(-50%, -50%);
+
+	z-index: 999999;
+
+	padding: 10px;
+
+	text-align: center;
+
+	display: none;
+
+}
+#result1,#result,#result2{
+	font-family: 'Merienda', cursive;
+	color: white;
+}
+#result1{
+	background-color: rgb(88, 10, 124);
+}
+#trainimage{
+	width:20%;
+	 height:300px;
+	 margin: 0 auto;
+}
+#train{
+		background-color: #a56ac7;
+  border-radius: 12px;
+  color: white;
+  border: none;
+  padding: 15px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 15px;
+  font-weight: bold;
+  width: 20%;
+  margin: 3px 2px;
+  cursor: pointer;
+  box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 30px 0 rgba(0,0,0,0.19);
+}
+
+
+
+
+
+
+
+
+
+
+
