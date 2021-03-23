@@ -13,7 +13,7 @@ this is a 60 sec  Fun card  𝗺𝗲𝗺𝗼𝗿𝘆 𝗴𝗮𝗺𝗲 🎮🃏
  
 
 ## DEMO 
-[![Memory Game demo](https://img.youtube.com/vi/VIDEO-ID/0.jpg)](https://www.youtube.com/watch?v=FfgEquhwX8M)
+[![Memory Game demo](https://img.youtube.com/vi/FfgEquhwX8M/0.jpg)](http://www.youtube.com/watch?v=FfgEquhwX8M)
  
   # Stack : 
 
