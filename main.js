@@ -25,8 +25,7 @@ document.addEventListener("DOMContentLoaded", () => {
     let timing
 
     //cards 
-    const cards = [
-        {
+    const cards = [{
             name: 'choc',
             img: 'images/choc.png'
         }, {
@@ -95,30 +94,31 @@ document.addEventListener("DOMContentLoaded", () => {
         current = 60;
         timing = setInterval(countdown, 1000);
 
-    })
-    //function to refresh game when the player wants to play again
-    let exitt = function () {
-        current = 60;
-        time.textContent = current
-        //removing the result pop up 
-        document.getElementById('popUpBox').style.display = "none";
-        document.getElementById('popUpOverlay').style.display = "none";
+    });
 
-        //emptying the grid 
-        var node = document.querySelector(".grid");
-        node.querySelectorAll('*').forEach(n => n.remove());
-        CardsWon = []
-        selectedCardsId = []
-        selectedCards = []
-        score.textContent = CardsWon.length
-        //recreating the board after reshuffle of the cards
-        createBoard();
-        let pic = document.querySelector('#resultpop')
-        let button = document.querySelector('#resultpop')
-        document.querySelector('#box').removeChild(pic)
-        timing = setInterval(countdown, 1000);
-    }
-    // adding a click ent on the - train more - button to allow player another round 
+    //function to refresh game when the player wants to play again
+    let exitt = function() {
+            current = 60;
+            time.textContent = current
+                //removing the result pop up 
+            document.getElementById('popUpBox').style.display = "none";
+            document.getElementById('popUpOverlay').style.display = "none";
+
+            //emptying the grid 
+            var node = document.querySelector(".grid");
+            node.querySelectorAll('*').forEach(n => n.remove());
+            CardsWon = []
+            selectedCardsId = []
+            selectedCards = []
+            score.textContent = CardsWon.length
+                //recreating the board after reshuffle of the cards
+            createBoard();
+            let pic = document.querySelector('#resultpop')
+            let button = document.querySelector('#resultpop')
+            document.querySelector('#box').removeChild(pic)
+            timing = setInterval(countdown, 1000);
+        }
+        // adding a click ent on the - train more - button to allow player another round 
     var btn = document.querySelector("#train");
     btn.addEventListener('click', exitt)
 
@@ -130,6 +130,7 @@ document.addEventListener("DOMContentLoaded", () => {
         //displaying the result as a pop up 
         let popUpBox = document.getElementById('popUpBox');
         popUpBox.style.display = "block";
+        document.getElementById('popUpOverlay').style.display = "block";
         let el = document.createElement("img");
 
         // if the player won 
@@ -137,7 +138,7 @@ document.addEventListener("DOMContentLoaded", () => {
             document.querySelector('#result').textContent = " 🎉Congratulation!! 🎉"
             document.querySelector('#result1').textContent = " 🎊 You have a Good Memory  🎯"
             document.querySelector('#result2').textContent = "let's train some More! 💪"
-            // el.setAttribute('src', "images/champ.jpg");
+                // el.setAttribute('src', "images/champ.jpg");
             el.setAttribute('src', "images/goodbrain.gif");
             el.setAttribute('id', "resultpop");
         }
@@ -164,7 +165,7 @@ document.addEventListener("DOMContentLoaded", () => {
         // decreamenting the time and displaying it 
         current--;
         time.textContent = current
-        //when time is up 
+            //when time is up 
         if (current === 0) {
 
             //stoping the clock 
@@ -179,8 +180,12 @@ document.addEventListener("DOMContentLoaded", () => {
             else gameOver(false)
         }
     }
-
-
+    // disable click for popup (of result)
+    document.getElementById('popUpOverlay').addEventListener('click', (e) => {
+        console.log("clicked");
+        e.preventDefault();
+        return false;
+    });
 
 
     //creating the board
@@ -193,7 +198,7 @@ document.addEventListener("DOMContentLoaded", () => {
             let card = document.createElement('img');
             card.setAttribute('src', 'images/game.jpg');
             card.setAttribute('data-id', i);
-            card.addEventListener('click', function () {
+            card.addEventListener('click', function() {
                 // if the cards are not matching flip back the card 
                 if (this.style.opacity !== '0.5') {
                     flipCard(this)
@@ -205,19 +210,28 @@ document.addEventListener("DOMContentLoaded", () => {
 
     createBoard()
 
-
+    function showSnackbar() {
+        let snackbarDiv = document.getElementById("snackbar");
+        snackbarDiv.classList.add("show");
+        setTimeout(function() { snackbarDiv.className = snackbarDiv.className.replace("show", ""); }, 3000);
+    }
     //checking for matching cards
     function isMatch() {
 
         let chosenCards = document.querySelectorAll('img');
         console.log(chosenCards)
-        //chosing cards 
+            //chosing cards 
         const card1Id = selectedCardsId[0];
         const card2Id = selectedCardsId[1];
-
+        let snackabar = document.getElementById('snackbar');
         // if matching 
         if (selectedCards[0] === selectedCards[1]) {
-            alert('You Got a match! Good Job');
+            showSnackbar();
+            document.getElementById('snackbar').classList.remove('wrong');
+            document.getElementById('snackbar').classList.add('right');
+            document.getElementById('snackbar').innerHTML = "You Got a match! Good Job";
+            //document.getElementById('snackbar').appendChild(msg);
+
             // marking the matching won cards with  lower opacity 
             chosenCards[card1Id].style.opacity = '0.5';
             chosenCards[card2Id].style.opacity = '0.5';
@@ -228,13 +242,19 @@ document.addEventListener("DOMContentLoaded", () => {
 
             chosenCards[card2Id].setAttribute('src', "images/game.jpg");
             chosenCards[card1Id].setAttribute('src', "images/game.jpg");
-            alert("not a match ! let's try again")
+            showSnackbar();
+            document.getElementById('snackbar').classList.remove('right');
+            document.getElementById('snackbar').classList.add('wrong');
+            //let msg = document.createTextNode("");
+            document.getElementById('snackbar').innerHTML = "Not a match ! let's try again";
+
+
         }
         //emptying the chosen cards and ids arrays 
         selectedCards = []
         selectedCardsId = []
         score.textContent = CardsWon.length
-        // if all the cards are won displaying the result 
+            // if all the cards are won displaying the result 
         if (CardsWon.length === cards.length / 2) {
             gameOver(true)
         }
